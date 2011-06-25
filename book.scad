@@ -1,25 +1,24 @@
 // Configuration (all sizes in millimeters)
 metal_thickness = 2;
+magnet_thickness = 1;
 
 // A5 paper default
 paper_width = 148;
 paper_height = 210;
-
 paper_sheet_thickness = 0.1;
-
-paper_sheets = ceil(365/2); // One page per day
+paper_sheets = ceil(365 / 2); // One page per day default
 
 explode = false; // Set to true to see parts separately
 // Configuration end
 
 // Calculate Cn size based on arithmetic progression
 // https://secure.wikimedia.org/wikipedia/en/wiki/ISO_216
-outer_width = paper_width * pow(2, 1/8);
-outer_height = paper_height * pow(2, 1/8);
+outer_width = paper_width * pow(2, 1 / 8);
+outer_height = paper_height * pow(2, 1 / 8);
 
 paper_thickness = paper_sheets * paper_sheet_thickness;
 
-outer_thickness = 2*metal_thickness +paper_thickness ;
+back_thickness = 2 * metal_thickness + paper_thickness;
 
 margin_width = (outer_width - paper_width) / 2;
 margin_height = (outer_height - paper_height) / 2;
@@ -27,15 +26,14 @@ margin_height = (outer_height - paper_height) / 2;
 overhang_width = margin_width * 2;
 
 // There's no need for left margin on the back and front
-back_width = outer_width - margin_width/2;
+back_width = outer_width - margin_width / 2;
 
 // The front is to the right of the overhang from the back
 front_width = back_width - overhang_width;
 
 magnet_margin = overhang_width / 4;
-magnet_width = overhang_width - 2*magnet_margin;
-magnet_height = outer_height - 2*magnet_margin;
-magnet_thickness = 1;
+magnet_width = overhang_width - 2 * magnet_margin;
+magnet_height = outer_height - 2 * magnet_margin;
 
 hinge_height = outer_height / 10;
 hinge_radius = metal_thickness / 2;
@@ -53,7 +51,7 @@ module back_cover() {
 }
 
 module back_side() {
-	cube(size = [metal_thickness, outer_height, outer_thickness]);
+	cube(size = [metal_thickness, outer_height, back_thickness]);
 }
 
 module back_overhang() {
@@ -92,7 +90,7 @@ module hinges() {
 }
 
 module front_hinges() {
-	translate([metal_thickness + overhang_width, 0, paper_thickness + 2*metal_thickness + hinge_radius]) {
+	translate([metal_thickness + overhang_width, 0, paper_thickness + 2 * metal_thickness + hinge_radius]) {
 		hinges();
 	}
 }
@@ -111,18 +109,18 @@ module clasp_hinges() {
 
 module clasp_side() {
 	translate([metal_thickness + back_width, 0, metal_thickness]) {
-		cube(size = [metal_thickness, outer_height, outer_thickness + magnet_thickness]);
+		cube(size = [metal_thickness, outer_height, back_thickness + magnet_thickness]);
 	}
 }
 
 module clasp_overhang() {
-	translate([metal_thickness + back_width - overhang_width, 0, paper_thickness + 2*metal_thickness + magnet_thickness]) {
+	translate([metal_thickness + back_width - overhang_width, 0, paper_thickness + 2 * metal_thickness + magnet_thickness]) {
 		cube(size = [overhang_width, outer_height, metal_thickness]);
 	}
 }
 
 module clasp_magnet() {
-	translate([metal_thickness + back_width - overhang_width + magnet_margin, magnet_margin, paper_thickness + 2*metal_thickness]) {
+	translate([metal_thickness + back_width - overhang_width + magnet_margin, magnet_margin, paper_thickness + 2 * metal_thickness]) {
 		cube(size = [magnet_width, magnet_height, magnet_thickness]);
 	}
 }
