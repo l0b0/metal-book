@@ -8,6 +8,9 @@ paper_height = 210;
 paper_sheet_thickness = 0.1;
 paper_sheets = ceil(365 / 2); // One page per day default
 
+paper_hole_positions = [0, 80];
+paper_hole_center = 40; // max(paper_hole_positions) / 2
+paper_hole_radius = 3;
 
 facets = 40; // Number of facets in circular objects
 explode = false; // Set to true to see parts separately
@@ -41,8 +44,11 @@ hinge_height = outer_height / 10;
 hinge_radius = metal_thickness / 2;
 
 module paper() {
-	translate([metal_thickness, margin_height, metal_thickness]) {
-		cube(size = [paper_width, paper_height, paper_thickness]);
+	difference() {
+		translate([metal_thickness, margin_height, metal_thickness]) {
+			cube(size = [paper_width, paper_height, paper_thickness]);
+		}
+		binding_holes();
 	}
 }
 
@@ -62,11 +68,28 @@ module back_overhang() {
 	}
 }
 
+module binding_hole() {
+	cylinder(h = back_thickness, r=paper_hole_radius, $fn=facets);
+}
+
+module binding_holes() {
+	translate([metal_thickness + overhang_width / 2, outer_height / 2 - paper_hole_center, 0]) {
+		for (position = paper_hole_positions) {
+			translate([0, position, 0]) {
+				binding_hole();
+			}
+		}
+	}
+}
+
 module back() {
-	union() {
-		back_cover();
-		back_side();
-		back_overhang();
+	difference() {
+		union() {
+			back_cover();
+			back_side();
+			back_overhang();
+		}
+		binding_holes();
 	}
 }
 
