@@ -1,0 +1,149 @@
+// All sizes in millimeters
+// (x, y, z) = (width, height, thickness)
+
+// Configuration
+metal_thickness = 2;
+
+// A5 paper
+paper_width = 148;
+paper_height = 210;
+
+paper_sheet_thickness = 0.1;
+
+paper_sheets = ceil(365/2); // One page per day
+
+// Configuration end
+
+// Calculate Cn size based on arithmetic progression
+// https://secure.wikimedia.org/wikipedia/en/wiki/ISO_216
+outer_width = paper_width * pow(2, 1/8);
+outer_height = paper_height * pow(2, 1/8);
+
+paper_thickness = paper_sheets * paper_sheet_thickness;
+
+outer_thickness = 2*metal_thickness +paper_thickness ;
+
+margin_width = (outer_width - paper_width) / 2;
+margin_height = (outer_height - paper_height) / 2;
+
+overhang_width = margin_width * 2;
+
+// There's no need for left margin on the back and front
+back_width = outer_width - margin_width/2;
+
+// The front is to the right of the overhang from the back
+front_width = back_width - overhang_width;
+
+magnet_margin = overhang_width / 4;
+magnet_width = overhang_width - 2*magnet_margin;
+magnet_height = outer_height - 2*magnet_margin;
+magnet_thickness = 1;
+
+hinge_height = outer_height / 10;
+hinge_radius = metal_thickness / 2;
+
+module paper() {
+	translate([metal_thickness, margin_height, metal_thickness]) {
+		cube(size = [paper_width, paper_height, paper_thickness]);
+	}
+}
+
+module back_cover() {
+	translate([metal_thickness, 0, 0]) {
+		cube(size = [back_width, outer_height, metal_thickness]);
+	}
+}
+
+module back_side() {
+	cube(size = [metal_thickness, outer_height, outer_thickness]);
+}
+
+module back_overhang() {
+	translate([metal_thickness, 0, paper_thickness + metal_thickness]) {
+		cube(size = [overhang_width, outer_height, metal_thickness]);
+	}
+}
+
+module back() {
+	union() {
+		back_cover();
+		back_side();
+		back_overhang();
+	}
+}
+
+module hinge() {
+	rotate([90, 0, 0]) {
+		cylinder(h = hinge_height, r=hinge_radius, $fn=36);
+	}
+}
+module top_hinge() {
+	translate([0, 2*hinge_height, 0]) {
+		hinge();
+	}
+}
+module bottom_hinge() {
+	translate([0, outer_height - hinge_height, 0]) {
+		hinge();
+	}
+}
+
+module hinges() {
+	top_hinge();
+	bottom_hinge();
+}
+
+module front_hinges() {
+	translate([metal_thickness + overhang_width, 0, paper_thickness + 2*metal_thickness + hinge_radius]) {
+		hinges();
+	}
+}
+
+module front() {
+	translate([metal_thickness + overhang_width, 0, paper_thickness + metal_thickness]) {
+		cube(size = [front_width, outer_height, metal_thickness]);
+	}
+}
+
+module clasp_hinges() {
+	translate([metal_thickness + back_width + hinge_radius, 0, metal_thickness - hinge_radius]) {
+		hinges();
+	}
+}
+
+module clasp_side() {
+	translate([metal_thickness + back_width, 0, metal_thickness]) {
+		cube(size = [metal_thickness, outer_height, outer_thickness + magnet_thickness]);
+	}
+}
+
+module clasp_overhang() {
+	translate([metal_thickness + back_width - overhang_width, 0, paper_thickness + 2*metal_thickness + magnet_thickness]) {
+		cube(size = [overhang_width, outer_height, metal_thickness]);
+	}
+}
+
+module clasp_magnet() {
+	translate([metal_thickness + back_width - overhang_width + magnet_margin, magnet_margin, paper_thickness + 2*metal_thickness]) {
+		cube(size = [magnet_width, magnet_height, magnet_thickness]);
+	}
+}
+
+module clasp() {
+	union() {
+		clasp_side();
+		clasp_overhang();
+		clasp_magnet();
+	}
+}
+
+module book() {
+	# paper();
+	front();
+	front_hinges();
+	back();
+	clasp();
+	clasp_hinges();
+}
+
+book();
