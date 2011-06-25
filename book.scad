@@ -12,6 +12,7 @@ paper_sheet_thickness = 0.1;
 
 paper_sheets = ceil(365/2); // One page per day
 
+explode = false; // Set to true to see parts separately
 // Configuration end
 
 // Calculate Cn size based on arithmetic progression
@@ -137,13 +138,29 @@ module clasp() {
 	}
 }
 
-module book() {
-	# paper();
-	front();
-	front_hinges();
-	back();
-	clasp();
-	clasp_hinges();
+module book(explosion) {
+	translate([0, 0, 0 * explosion]) {
+		back();
+	}
+	translate([0, 0, 1 * explosion]) {
+		clasp_hinges();
+	}
+	translate([0, 0, 2 * explosion]) {
+		# paper();
+	}
+	translate([0, 0, 3 * explosion]) {
+		front();
+	}
+	translate([0, 0, 4 * explosion]) {
+		front_hinges();
+	}
+	translate([0, 0, 5 * explosion]) {
+		clasp();
+	}
 }
 
-book();
+if (explode)
+	// Must be bigger than the biggest distance in imploded modus to be absolutely sure that it won't still clash
+	assign(explosion=1.1 * (back_thickness + 2 * hinge_radius)) book(explosion);
+else
+	book();
