@@ -43,6 +43,39 @@ magnet_height = outer_height - 2 * magnet_margin;
 hinge_height = outer_height / 10;
 hinge_radius = metal_thickness / 2;
 
+// Some useful information for constructing by hand
+echo (str(
+	"Book outer dimensions: ",
+	"width=", outer_width, ", ",
+	"height=", outer_height, ", ",
+	"thickness=", back_thickness + 2*magnet_thickness,
+	" (not counting hinges)"));
+
+echo (str(
+	"Center length of the back plate sections: ",
+	back_width + metal_thickness / 2, ", ",
+	back_thickness - metal_thickness, ", ",
+	overhang_width + metal_thickness / 2));
+echo (str(
+	"Total length of the back plate sections: ",
+	back_width + metal_thickness / 2 +
+	back_thickness - metal_thickness +
+	overhang_width + metal_thickness / 2));
+
+echo (str(
+	"Width of the front plate: ",
+	front_width));
+
+echo (str(
+	"Center length of the clasp sections: ",
+	back_thickness + magnet_thickness - metal_thickness / 2, ", ",
+	overhang_width - metal_thickness / 2));
+
+echo (str(
+	"Total length of the clasp sections: ",
+	back_thickness + magnet_thickness - metal_thickness / 2 +
+	overhang_width - metal_thickness / 2));
+
 module paper() {
 	difference() {
 		translate([metal_thickness, margin_height, metal_thickness]) {
