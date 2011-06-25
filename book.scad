@@ -135,19 +135,19 @@ module clasp() {
 
 module book(explosion) {
 	translate([0, 0, 0 * explosion]) {
-		back();
+		# paper();
 	}
 	translate([0, 0, 1 * explosion]) {
-		clasp_hinges();
+		back();
 	}
 	translate([0, 0, 2 * explosion]) {
-		# paper();
+		front_hinges();
 	}
 	translate([0, 0, 3 * explosion]) {
 		front();
 	}
 	translate([0, 0, 4 * explosion]) {
-		front_hinges();
+		clasp_hinges();
 	}
 	translate([0, 0, 5 * explosion]) {
 		clasp();
