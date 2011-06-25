@@ -1,10 +1,7 @@
-// All sizes in millimeters
-// (x, y, z) = (width, height, thickness)
-
-// Configuration
+// Configuration (all sizes in millimeters)
 metal_thickness = 2;
 
-// A5 paper
+// A5 paper default
 paper_width = 148;
 paper_height = 210;
 
