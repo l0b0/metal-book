@@ -8,6 +8,8 @@ paper_height = 210;
 paper_sheet_thickness = 0.1;
 paper_sheets = ceil(365 / 2); // One page per day default
 
+
+facets = 40; // Number of facets in circular objects
 explode = false; // Set to true to see parts separately
 // Configuration end
 
@@ -70,7 +72,7 @@ module back() {
 
 module hinge() {
 	rotate([90, 0, 0]) {
-		cylinder(h = hinge_height, r=hinge_radius, $fn=36);
+		cylinder(h = hinge_height, r=hinge_radius, $fn=facets);
 	}
 }
 module top_hinge() {
