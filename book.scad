@@ -104,6 +104,10 @@ filing_holes_x_position = metal_thickness + overhang_x_size / 2;
 filing_holes_y_position = paper_cn_y_size / 2 - filing_hole_y_center;
 filing_holes_z_position = 0;
 
+book_x_size = clasp_fore_x_position + clasp_fore_x_size;
+book_y_size = paper_cn_y_size;
+book_z_size = clasp_front_z_position + clasp_front_z_size;
+
 // CALCULATIONS END
 
 // MODULES
@@ -243,9 +247,9 @@ module book(explosion) {
 
 echo (str(
 	"Book: ",
-	"width=", clasp_fore_x_position + clasp_fore_x_size, ", ",
-	"height=", outer_y_size, ", ",
-	"thickness=", clasp_front_z_position + clasp_front_z_size,
+	"width=", book_x_size, ", ",
+	"height=", book_y_size, ", ",
+	"thickness=", book_z_size,
 	" (not counting hinges)"));
 
 echo (str(
