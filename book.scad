@@ -18,8 +18,8 @@ explode = false; // Set to true to see parts separately
 
 // Calculate Cn size based on arithmetic progression
 // https://secure.wikimedia.org/wikipedia/en/wiki/ISO_216
-outer_width = round(paper_width * pow(2, 1.0 / 8) + 0.2);
-outer_height = round(paper_height * pow(2, 1.0 / 8) + 0.2);
+outer_width = paper_width * pow(2, 1.0 / 8);
+outer_height = paper_height * pow(2, 1.0 / 8);
 
 paper_thickness = paper_sheets * paper_sheet_thickness;
 

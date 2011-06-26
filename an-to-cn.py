@@ -36,7 +36,7 @@ C_SERIES = [
     [28, 40]]
 
 def a_to_c(dimension):
-    return dimension * pow(2, 1.0 / 8) + 0.11
+    return dimension * pow(2, 1.0 / 8)
 
 def main():
     for a_values, c_values in zip(A_SERIES, C_SERIES):
