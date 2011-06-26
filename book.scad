@@ -111,6 +111,9 @@ module binding_holes() {
 			translate([0, position, 0]) {
 				binding_hole();
 			}
+			echo (str(
+				"Binding hole center distance from bottom: ",
+				outer_height / 2 - paper_hole_center + position + paper_hole_radius));
 		}
 	}
 }
