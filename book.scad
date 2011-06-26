@@ -76,6 +76,12 @@ echo (str(
 	back_thickness + magnet_thickness - metal_thickness / 2 +
 	overhang_width - metal_thickness / 2));
 
+echo (str(
+	"Magnetic strip dimensions: ",
+	"width=", magnet_width, ", ",
+	"height=", magnet_height, ", ",
+	"thickness=", magnet_thickness
+	));
 module paper() {
 	difference() {
 		translate([metal_thickness, margin_height, metal_thickness]) {
