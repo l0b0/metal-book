@@ -190,7 +190,6 @@ module clasp() {
 	union() {
 		clasp_side();
 		clasp_overhang();
-		clasp_magnet();
 	}
 }
 
@@ -211,6 +210,9 @@ module book(explosion) {
 		clasp_hinges();
 	}
 	translate([0, 0, 5 * explosion]) {
+		clasp_magnet();
+	}
+	translate([0, 0, 6 * explosion]) {
 		clasp();
 	}
 }
