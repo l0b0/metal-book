@@ -1,7 +1,7 @@
 // CONFIGURATION
 // All sizes in millimeters
 
-metal_thickness = 2;
+material_thickness = 2;
 
 magnet_z_size = 1;
 
@@ -38,16 +38,16 @@ text_block_x_margin = (paper_cn_x_size - paper_x_size) / 2; // Only applicable t
 text_block_y_margin = (paper_cn_y_size - paper_y_size) / 2;
 text_block_z_margin = 0; // Not applicable unless you want to add other things with the paper
 
-spine_x_size = metal_thickness;
+spine_x_size = material_thickness;
 spine_y_size = paper_cn_y_size;
-spine_z_size = 2 * metal_thickness + text_block_z_size + text_block_z_margin;
+spine_z_size = 2 * material_thickness + text_block_z_size + text_block_z_margin;
 
 text_block_x_position = spine_x_size;
 text_block_y_position = text_block_y_margin; // Centers it
 
 back_x_size = text_block_x_size + text_block_x_margin;
 back_y_size = paper_cn_y_size;
-back_z_size = metal_thickness;
+back_z_size = material_thickness;
 back_x_position = spine_x_size;
 back_y_position = 0;
 back_z_position = 0;
@@ -56,19 +56,19 @@ text_block_z_position = back_z_size;
 
 overhang_x_size = filing_hole_spine_margin + filing_hole_paper_margin;
 overhang_y_size = paper_cn_y_size;
-overhang_z_size = metal_thickness;
+overhang_z_size = material_thickness;
 overhang_x_position = spine_x_size;
 overhang_y_position = 0;
-overhang_z_position = metal_thickness + text_block_z_size; // Make room for the back cover + paper
+overhang_z_position = material_thickness + text_block_z_size; // Make room for the back cover + paper
 
 front_x_size = back_x_size - overhang_x_size;
 front_y_size = paper_cn_y_size;
-front_z_size = metal_thickness;
+front_z_size = material_thickness;
 front_x_position = overhang_x_position + overhang_x_size;
 front_y_position = 0;
 front_z_position = overhang_z_position;
 
-clasp_fore_x_size = metal_thickness;
+clasp_fore_x_size = material_thickness;
 clasp_fore_y_size = paper_cn_y_size;
 clasp_fore_z_size = spine_z_size + magnet_z_size;
 clasp_fore_x_position = back_x_position + back_x_size;
@@ -77,7 +77,7 @@ clasp_fore_z_position = back_z_size;
 
 clasp_front_x_size = overhang_x_size;
 clasp_front_y_size = paper_cn_y_size;
-clasp_front_z_size = metal_thickness;
+clasp_front_z_size = material_thickness;
 clasp_front_x_position = back_x_position + back_x_size - clasp_front_x_size;
 clasp_front_y_position = 0;
 clasp_front_z_position = front_z_position + front_z_size + magnet_z_size;
@@ -90,17 +90,17 @@ magnet_y_position = magnet_margin;
 magnet_z_position = clasp_front_z_position - magnet_z_size;
 
 hinge_y_size = paper_cn_y_size / 10; // Completely arbitrary
-hinge_radius = metal_thickness / 2; // To fit with the clasp
+hinge_radius = material_thickness / 2; // To fit with the clasp
 hinge_y_positions = [2 * hinge_y_size, paper_cn_y_size - hinge_y_size];
 front_hinge_x_position = overhang_x_position + overhang_x_size;
 front_hinge_y_position = 0;
 front_hinge_z_position = overhang_z_position + overhang_z_size + hinge_radius;
-clasp_hinge_x_position = metal_thickness + back_x_size + hinge_radius;
+clasp_hinge_x_position = material_thickness + back_x_size + hinge_radius;
 clasp_hinge_y_position = 0;
-clasp_hinge_z_position = metal_thickness - hinge_radius;
+clasp_hinge_z_position = material_thickness - hinge_radius;
 
 filing_hole_z_size = spine_z_size;
-filing_holes_x_position = metal_thickness + overhang_x_size / 2;
+filing_holes_x_position = material_thickness + overhang_x_size / 2;
 filing_holes_y_position = paper_cn_y_size / 2 - filing_hole_y_center;
 filing_holes_z_position = 0;
 
@@ -256,7 +256,7 @@ echo (str(
 	"Metal: ",
 	"length=", back_x_size + spine_z_size + overhang_x_size + clasp_fore_z_size + clasp_front_x_size, " (total for all parts), ",
 	"width=", paper_cn_y_size, " (i.e., book height), ",
-	"thickness=", metal_thickness));
+	"thickness=", material_thickness));
 
 echo (str(
 	"Filing holes: ",
