@@ -278,8 +278,20 @@ echo (str(
 	"text block thickness=", text_block_z_size));
 
 echo (str(
+	"Back: ",
+	"width=", back_x_size));
+
+echo (str(
+	"Spine: ",
+	"width=", spine_z_size, " (before bending)"));
+
+echo (str(
+	"Overhang: ",
+	"width=", overhang_x_size, " (before bending)"));
+
+echo (str(
 	"Back, spine, overhang: ",
-	"length=", back_x_size + spine_z_size + overhang_x_size), " (before bending)");
+	"width=", back_x_size + spine_z_size + overhang_x_size, " (before bending)"));
 
 echo (str(
 	"Front plate: ",
