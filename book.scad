@@ -271,6 +271,8 @@ echo (str(
 	"Paper / text block: ",
 	"width=", text_block_x_size, ", ",
 	"height=", text_block_y_size, ", ",
+	"margin top/bottom=", text_block_y_margin, ", ",
+	"margin to clasp=", text_block_x_margin, ", ",
 	"sheets=", paper_sheet_count, ", ",
 	"sheet thickness=", paper_z_size, ", ",
 	"text block thickness=", text_block_z_size));
