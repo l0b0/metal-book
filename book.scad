@@ -217,7 +217,10 @@ module clasp() {
 	}
 }
 
-module book(explosion) {
+module book() {
+	// Must be bigger than the biggest distance in imploded modus to be absolutely sure that it won't still clash
+	explosion = explode ? 1.1 * (spine_z_size + 2 * hinge_radius) : 0;
+
 	translate([0, 0, 0 * explosion]) {
 		# text_block();
 	}
@@ -321,8 +324,4 @@ echo (str(
 
 // DOCUMENTATION END
 
-if (explode)
-	// Must be bigger than the biggest distance in imploded modus to be absolutely sure that it won't still clash
-	assign(explosion=1.1 * (spine_z_size + 2 * hinge_radius)) book(explosion);
-else
-	book();
+book();
