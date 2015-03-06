@@ -221,25 +221,20 @@ module book() {
 	// Must be bigger than the biggest distance in imploded modus to be absolutely sure that it won't still clash
 	explosion = explode ? 1.1 * (spine_z_size + 2 * hinge_radius) : 0;
 
-	translate([0, 0, 0 * explosion]) {
+	if (! explode) {
 		# text_block();
-	}
-	translate([0, 0, 1 * explosion]) {
-		back_spine_overhang();
-	}
-	translate([0, 0, 2 * explosion]) {
 		# front_hinges();
-	}
-	translate([0, 0, 3 * explosion]) {
-		front();
-	}
-	translate([0, 0, 4 * explosion]) {
 		# clasp_hinges();
-	}
-	translate([0, 0, 5 * explosion]) {
 		# clasp_magnet();
 	}
-	translate([0, 0, 6 * explosion]) {
+
+	translate([0, 0, 0 * explosion]) {
+		back_spine_overhang();
+	}
+	translate([0, 0, 1 * explosion]) {
+		front();
+	}
+	translate([0, 0, 2 * explosion]) {
 		clasp();
 	}
 }
