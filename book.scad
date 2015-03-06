@@ -218,7 +218,7 @@ module clasp() {
 }
 
 module book() {
-	// Must be bigger than the biggest distance in imploded modus to be absolutely sure that it won't still clash
+	// Must be bigger than the biggest Z distance in imploded mode to be absolutely sure that it won't still clash
 	explosion = explode ? 1.1 * (spine_z_size + 2 * hinge_radius) : 0;
 
 	if (! explode) {
